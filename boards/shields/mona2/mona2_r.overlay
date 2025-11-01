@@ -52,7 +52,7 @@
         status = "okay";
         compatible = "pixart,paw3222";  //トラボセンサ用のドライバとバインド
         reg = <0>;
-        spi-max-frequency = <250000>;
+        spi-max-frequency = <2000000>;
         /* IRQ をアクティブローのプルダウンにして安定化を試す */
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>; //P0.02を指定(MOTION)
         //irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; //P0.02を指定(MOTION)
@@ -68,13 +68,12 @@
 
     scroller {
         layers = <2>;
-/*
+
         input-processors = <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
                            <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
                            <&zip_xy_to_scroll_mapper>,                         //スクロールモードに変更
                            <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //スクロールのX軸反転
                            <&zip_scroll_scaler 1 5>;                           //スクロール量を1/4倍
-*/
     };
 
 };
