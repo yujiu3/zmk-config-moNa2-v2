@@ -44,15 +44,14 @@
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
-    cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;  //P0.09を指定(CS)
+    //cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;  //P0.09を指定(CS)
+    cs-gpios = <&gpio1 14 GPIO_ACTIVE_LOW>;  //P1.14を指定(CS)
 
     trackball_central: trackball_central@0 {
         status = "okay";
         compatible = "pixart,paw3222";  //トラボセンサ用のドライバとバインド
         reg = <0>;
-        spi-max-frequency = <1000000>;
-//        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; //P0.02を指定(MOTION)
-        irq-gpios = <&gpio0 2 GPIO_ACTIVE_HIGH>; /* IRQ 極性をアクティブ高に変更して試験 */
+        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; //P0.02を指定(MOTION)
 
     };
 };
@@ -62,7 +61,7 @@
 &trackball_central_listener {
     status = "okay";
     device = <&trackball_central>;
-/*
+
     scroller {
         layers = <2>;
         input-processors = <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
@@ -71,5 +70,5 @@
                            <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //スクロールのX軸反転
                            <&zip_scroll_scaler 1 5>;                           //スクロール量を1/4倍
     };
-*/
+
 };
