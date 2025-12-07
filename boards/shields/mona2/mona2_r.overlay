@@ -75,14 +75,23 @@
     status = "okay";
     device = <&trackball_central>;
 
-    scroller {
-        layers = <2>;
+/* input-processors設定 */ 
+        input-processors = <
+/* PAW3222用設定（カーソル移動方向反転） */ 
+            &zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)
+/* AML発動条件設定 */ 
+            &zip_temp_layer 4 3000
+        >;
 
-        input-processors = <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
-                           <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
-                           <&zip_xy_to_scroll_mapper>,                         //スクロールモードに変更
-                           <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //スクロールのX軸反転
-                           <&zip_scroll_scaler 1 5>;                           //スクロール量を1/4倍
+    scroller {
+        layers = <5>;
+
+        input-processors = <
+            //&zip_xy_transform INPUT_TRANSFORM_XY_SWAP        //X軸とY軸の入れ替え
+            &zip_xy_to_scroll_mapper                         //スクロールモードに変更
+            &zip_scroll_transform INPUT_TRANSFORM_X_INVERT   //スクロールのX軸反転
+            &zip_scroll_scaler 1 5                           //スクロール量を1/5倍
+        >;
     };
 
 };
