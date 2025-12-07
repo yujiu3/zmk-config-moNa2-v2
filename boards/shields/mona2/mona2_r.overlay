@@ -22,7 +22,7 @@
 &zip_temp_layer {
     excluded-positions = <
         17 // 左クリック
-        20 // 右クリック
+        19 // 右クリック
     >;
 };
 
