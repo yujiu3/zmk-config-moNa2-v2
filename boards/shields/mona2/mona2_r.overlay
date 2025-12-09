@@ -77,8 +77,8 @@
 // input-processors設定
         input-processors = <
 // PAW3222用設定（カーソル移動方向反転）
-//            &zip_xy_transform INPUT_TRANSFORM_X_INVERT
-//            &zip_xy_transform INPUT_TRANSFORM_Y_INVERT
+            &zip_xy_transform INPUT_TRANSFORM_X_INVERT
+            &zip_xy_transform INPUT_TRANSFORM_Y_INVERT
 // AML発動条件設定
             &zip_temp_layer 4 3000
         >;
