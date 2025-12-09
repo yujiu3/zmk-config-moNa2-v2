@@ -82,6 +82,12 @@
             &zip_temp_layer 4 3000
         >;
 
+scroller {
+    layers = <5>;
+    input-processors = < &code_mapper (INPUT_REL_X INPUT_REL_HWHEEL) (INPUT_REL_Y INPUT_REL_WHEEL) >;
+};
+
+/*
     scroller {
         layers = <5>;
 
@@ -97,5 +103,5 @@
             &zip_scroll_scaler 1 5                           //スクロール量を1/5倍
         >;
     };
-
+*/
 };
