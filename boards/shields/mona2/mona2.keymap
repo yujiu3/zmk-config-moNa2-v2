@@ -7,6 +7,147 @@
 #include <dt-bindings/zmk/pointing.h>
 
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 100
+
+#define MOUSE 4
+#define SCROLL 5
+#define NUM 6
+
+// OS設定を日本語キーボードのまま使用するための変換定義
+#define JP_DQUOTE       AT                // "
+#define JP_AMPERSAND    CARET             // &
+#define JP_QUOTE        AMPERSAND         // '
+#define JP_EQUAL        UNDER             // =
+#define JP_CARET        EQUAL             // ^
+#define JP_YEN          0x89              // ¥
+#define JP_PLUS         COLON             // +
+#define JP_TILDE        PLUS              // ~
+#define JP_PIPE         LS(0x89)          // |
+#define JP_AT           LEFT_BRACKET      // @
+#define JP_COLON        SINGLE_QUOTE      // :
+#define JP_ASTERISK     DOUBLE_QUOTES     // *
+#define JP_BACKQUOTE    LEFT_BRACE        // `
+#define JP_UNDERSCORE   LS(0x87)          // _
+#define JP_LBRACKET     RIGHT_BRACKET     // [
+#define JP_RBRACKET     BACKSLASH         // ]
+#define JP_LPAREN       ASTERISK          // (
+#define JP_RPAREN       LEFT_PARENTHESIS  // )
+#define JP_LBRACE       RIGHT_BRACE       // {
+#define JP_RBRACE       PIPE              // }
+#define JP_KANA         LANGUAGE_1        // かな
+#define JP_EISU         LANGUAGE_2        // 英数
+#define JP_HANZEN       GRAVE             // 半角/全角
+
+&mt {
+    flavor = "tap-preferred";
+    require-prior-idle-ms = <200>;
+    quick-tap-ms = <300>;
+};
+
+&lt {
+    flavor = "balanced";
+    require-prior-idle-ms = <200>;
+    quick-tap-ms = <300>;
+};
+
+/ {
+    combos {
+				compatible = "zmk,combos";
+				combo_esc {
+            timeout-ms = <50>;
+            key-positions = <33 34>;
+            bindings = <&kp ESC>;
+        };
+				combo_tab {
+            timeout-ms = <50>;
+            key-positions = <34 35>;
+            bindings = <&kp TAB>;
+        };
+				combo_lc_pgup {
+            timeout-ms = <50>;
+            key-positions = <16 17>;
+            bindings = <&kp LC(PAGE_UP)>;
+        };
+				combo_lc_pgdn {
+            timeout-ms = <50>;
+            key-positions = <17 18>;
+            bindings = <&kp LC(PAGE_DOWN)>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+&mt ESCAPE Q      &kp W             &lt 5 E       &kp R           &lt 6 T                                        &kp Y        &kp U            &lt 5 I          &kp O                   &lt 6 P
+&kp A             &kp S             &kp D         &kp F           &kp G                         &trans           &kp H        &kp J            &kp K            &kp L                   &kp MINUS
+&mt LEFT_SHIFT Z  &mt LEFT_SHIFT X  &mt LCTRL C   &mt LEFT_ALT V  &kp B        &trans           &trans           &kp N        &mt RIGHT_ALT M  &mt RCTRL COMMA  &mt RIGHT_SHIFT PERIOD  &mt JP_YEN SLASH
+&kp LCTRL         &mt LEFT_WIN TAB  &kp LEFT_ALT  &lt 5 LANG2     &lt 4 SPACE  &lt 2 LANG1      &lt 5 BACKSPACE  &lt 1 ENTER                                                            &mt JP_TILDE ESCAPE
+            >;
+
+            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
+        };
+
+        SYMBOL {
+            bindings = <
+&kp F1                   &kp F2        &kp F3        &kp LA(F4)       &kp F5                                               &kp F6             &kp F7            &kp F8           &kp F9                   &kp F10
+&kp EXCLAMATION          &kp JP_AT     &kp HASH      &kp DOLLAR       &kp PERCENT                                  &trans  &kp JP_CARET       &kp JP_AMPERSAND  &kp JP_ASTERISK  &kp JP_LPAREN            &kp JP_RPAREN
+&mt LEFT_SHIFT LC(Z)     &kp LC(X)     &kp LC(C)     &kp LC(V)        &kp LC(B)             &trans                 &trans  &kp JP_UNDERSCORE  &kp MINUS         &kp JP_PLUS      &mt SEMICOLON JP_COLON   &kp JP_QUOTE
+&kp LCTRL                &kp LEFT_WIN  &kp LEFT_ALT  &kp LC(PAGE_UP)  &mt LC(END) LC(HOME)  &kp LC(PAGE_DOWN)      &trans  &trans                                                                         &kp JP_PIPE
+            >;
+        };
+
+        NUM {
+            bindings = <
+&trans  &trans  &trans   &trans   &kp JP_LBRACKET              &kp JP_RBRACKET  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp JP_EQUAL
+&trans  &trans  &trans   &trans   &kp JP_LPAREN        &trans  &kp JP_RPAREN    &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp JP_ASTERISK
+&trans  &trans  &trans   &trans   &kp JP_TILDE  &trans  &trans  &kp NUMBER_0     &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp SLASH
+&trans  &trans  &trans   &trans   &trans   &trans      &kp MINUS  &kp JP_PLUS                                               &mt PERIOD COMMA
+            >;
+        };
+
+        ARROW {
+            bindings = <
+&kp ESCAPE      &mkp MB4                &kp UP_ARROW    &mkp MB5                 &trans                       &kp LG(LEFT_ARROW)          &kp LA(LEFT_ARROW)      &kp UP_ARROW    &kp RA(RIGHT_ARROW)      &kp RG(RIGHT_ARROW)
+&kp HOME        &kp LEFT_ARROW          &kp DOWN_ARROW  &kp RIGHT_ARROW          &kp END              &trans  &kp LC(LS(TAB))             &kp LEFT_ARROW          &kp DOWN_ARROW  &kp RIGHT_ARROW          &kp RC(TAB)
+&kp LEFT_SHIFT  &kp LG(LS(LEFT_ARROW))  &trans          &kp LG(LS(RIGHT_ARROW))  &trans   &trans      &trans  &kp LA(LG(LC(LEFT_ARROW)))  &kp LA(LG(LEFT_ARROW))  &kp LA(LG(F))   &kp RG(RA(RIGHT_ARROW))  &kp RA(RC(RG(RIGHT_ARROW)))
+&trans          &trans                  &trans          &trans                   &trans   &trans      &trans  &kp BACKSPACE                                                                                &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
+        };
+
+        MOUSE {
+            bindings = <
+&mt ESCAPE Q      &kp W             &lt 5 E       &kp R               &lt 6 T                                  &kp Y       &kp U            &lt 5 I         &kp O            &kp DELETE
+&kp A             &mt LEFT_SHIFT S  &mt LCTRL D   &mt LEFT_ALT F      &kp G                     &trans         &kp H       &mkp MB1         &kp UP_ARROW    &mkp MB2         &kp MINUS
+&mt LEFT_SHIFT Z  &kp X             &kp C         &kp V               &kp B    &trans           &trans         &kp N       &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &mt JP_YEN SLASH
+&kp LCTRL         &mt LEFT_WIN TAB  &kp LEFT_ALT  &mt LEFT_ALT LANG1  &trans   &lt 2 LANG2      &kp BACKSPACE  &lt 1 ENTER                                                   &mt JP_TILDE ESCAPE
+            >;
+        };
+
+        SCROLL {
+            bindings = <
+&trans     &trans              &trans              &trans               &trans                                        &trans            &trans          &trans          &trans           &trans
+&trans     &trans              &kp LG(UP_ARROW)    &trans               &trans                       &trans           &trans            &trans          &kp UP_ARROW    &trans           &trans
+&trans     &kp LG(LEFT_ARROW)  &kp LG(DOWN_ARROW)  &kp LG(RIGHT_ARROW)  &trans     &trans            &trans           &trans            &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp LCTRL
+&kp LCTRL  &kp LCTRL           &trans              &kp LS(LG(S))        &kp LG(D)  &kp LA(LC(DEL))   &kp LC(PAGE_UP)  &kp LC(PAGE_DOWN)                                                  &trans
+            >;
+        };
+
+        CONFIG {
+            bindings = <
+&bt BT_CLR_ALL  &bt BT_CLR    &trans        &trans        &trans                            &trans  &trans  &trans  &trans       &trans
+&trans          &trans        &trans        &trans        &bootloader               &trans  &trans  &trans  &trans  &trans       &bootloader
+&bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans      &trans  &trans  &trans  &trans  &trans       &trans
+&trans          &trans        &trans        &trans        &trans        &trans      &trans  &trans                               &trans
+            >;
+        };
+    };
+};
+
+
+/*****************************************************
 #define MOUSE 5
 #define SCROLL 6
 
@@ -152,3 +293,4 @@
         };
     };
 };
+*********************************************************/
