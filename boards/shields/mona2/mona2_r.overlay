@@ -19,6 +19,7 @@
 };
 
 &pinctrl {
+/*
     spi0_default: spi0_default {    //通常時(SPI通信中)のピン構成
         group1 {
             psels = <NRF_PSEL(SPIM_SCK, 0, 5)>, //P0.05を指定(SCLK)
@@ -26,7 +27,7 @@
                 <NRF_PSEL(SPIM_MISO, 0, 4)>;
         };
     };
-
+*/
     spi0_sleep: spi0_sleep {    //スリープ時のピン構成(省電力)
         group1 {
             psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
@@ -75,7 +76,7 @@
 	};
 };
 
-
+/*
 &spi0 {
     status = "okay";
     compatible = "nordic,nrf-spim"; //マイコンがnRFシリーズ
@@ -116,3 +117,4 @@
     };
 
 };
+*/
