@@ -76,6 +76,11 @@
 	};
 };
 
+&trackball_central_listener {
+	status = "okay";
+	device = <&trackball>;
+};
+
 /*
 &spi0 {
     status = "okay";
