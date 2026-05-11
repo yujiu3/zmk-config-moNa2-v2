@@ -44,7 +44,7 @@
 
     trackball: trackball@75 {
         compatible = "pixart,pat9125";
-        reg = <0x73>;
+        reg = <0x75>;
         status = "okay";
         motion-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         zephyr,axis-x = <INPUT_REL_X>;
