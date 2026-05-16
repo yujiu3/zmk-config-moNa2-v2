@@ -42,9 +42,9 @@
     pinctrl-1 = <&i2c1_sleep>;
     pinctrl-names = "default", "sleep";
 
-    trackball: trackball@75 {
+    trackball: trackball@79 {
         compatible = "pixart,pat9125";
-        reg = <0x75>;
+        reg = <0x79>;
         status = "okay";
         motion-gpios = <&gpio0 9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         zephyr,axis-x = <INPUT_REL_X>;
