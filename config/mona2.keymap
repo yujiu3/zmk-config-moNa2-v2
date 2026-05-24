@@ -93,18 +93,46 @@
         };
     };
 
+    behaviors {
+        lt_to_layer_0: lt_to_layer_0 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_TO_0";
+            bindings = <&mo>, <&to_layer_0>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        scroll_up_down: mouse_wheel_up_down {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+
+            tap-ms = <20>;
+        };
+
+        scroll_right_left: mouse_wheel_right_left {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
+
+            tap-ms = <20>;
+        };
+    };
+
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
 &mt ESCAPE Q      &kp W             &lt 5 E       &kp R           &lt 6 T                                      &kp Y        &kp U            &lt 5 I          &kp O                   &lt 6 P
-&kp A             &kp S             &kp D         &kp F           &kp G                       &trans           &kp H        &kp J            &kp K            &kp L                   &kp MINUS
-&mt LEFT_SHIFT Z  &mt LEFT_SHIFT X  &mt LCTRL C   &mt LEFT_ALT V  &kp B        &trans         &trans           &kp N        &mt RIGHT_ALT M  &mt RCTRL COMMA  &mt RIGHT_SHIFT PERIOD  &mt JP_YEN SLASH
+&kp A             &kp S             &kp D         &kp F           &kp G                       &kp HOME         &kp H        &kp J            &kp K            &kp L                   &kp MINUS
+&mt LEFT_SHIFT Z  &mt LEFT_SHIFT X  &mt LCTRL C   &mt LEFT_ALT V  &kp B        &kp TAB        &kp END          &kp N        &mt RIGHT_ALT M  &mt RCTRL COMMA  &mt RIGHT_SHIFT PERIOD  &mt JP_YEN SLASH
 &kp LCTRL         &mt LEFT_WIN TAB  &kp LEFT_ALT  &lt 5 LANG2     &lt 4 SPACE  &lt 2 LANG1    &lt 5 BACKSPACE  &lt 1 ENTER                                                            &mt JP_TILDE ESCAPE
             >;
 
-            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
+            sensor-bindings = <&scroll_up_down>;
         };
 
         SYMBOL {
