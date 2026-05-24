@@ -93,8 +93,9 @@
         };
     };
 
-    behaviors {
 /**********
+    behaviors {
+
         lt_to_layer_0: lt_to_layer_0 {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
@@ -103,7 +104,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
-**********/
+
 
         scroll_up_down: mouse_wheel_up_down {
             compatible = "zmk,behavior-sensor-rotate";
@@ -122,6 +123,7 @@
         };
     };
 
+**********/
 
     keymap {
         compatible = "zmk,keymap";
@@ -134,7 +136,7 @@
 &kp LCTRL         &mt LEFT_WIN TAB  &kp LEFT_ALT  &lt 5 LANG2     &lt 4 SPACE  &lt 2 LANG1    &lt 5 BACKSPACE  &lt 1 ENTER                                                            &mt JP_TILDE ESCAPE
             >;
 
-            sensor-bindings = <&scroll_up_down>;
+            sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
         };
 
         SYMBOL {
